@@ -6,7 +6,7 @@ The Summary Report Automated Checker is a tool designed to process `.tar.xz` fil
 
 This repository contains two versions of the script:
 
-- **Version 1.0.10**: Stores detailed logs for each individual file processed.
+- **Version 1.0.5**: Stores detailed logs for each individual file processed.
 - **Version 2.0.10**: Focuses on storing only the summary of processed files and prints logs to the terminal without saving them.
 
 ## Versions

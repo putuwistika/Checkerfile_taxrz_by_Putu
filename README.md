@@ -11,7 +11,7 @@ This repository contains two versions of the script:
 
 ## Versions
 
-### Version 1.0.10
+### Version 1.0.5
 
 **Description**: 
 

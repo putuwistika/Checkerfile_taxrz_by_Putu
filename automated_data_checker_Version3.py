@@ -1,10 +1,3 @@
-"""
-Deskripsi:
-Skrip ini memproses file .tar.xz yang berisi file .txt dengan memfilter data yang memiliki kondisi 'OK' dan tidak memiliki
-'Null' maupun 'Anomaly'. Data yang terfilter disimpan ke dalam DataFrame dan kemudian diunggah ke dalam database PostgreSQL
-menggunakan SQLAlchemy.
-"""
-
 import tarfile
 import pandas as pd
 import re
@@ -53,18 +46,21 @@ class TarXZProcessor:
                         elif status == 'Anomaly':
                             anomaly_count += 1
 
-        # Return True if the file has only OK data and no Null or Anomaly
-        return ok_count > 0 and null_count == 0 and anomaly_count == 0
+        # Check if the file has all OK data and no Null or Anomaly
+        if ok_count > 0 and null_count == 0 and anomaly_count == 0:
+            print(f"File {os.path.basename(file_path)} memiliki semua data OK tanpa Null atau Anomaly.")
+            # Convert the data to DataFrame and insert it into PostgreSQL
+            self.save_to_db()
+        else:
+            print(f"File {os.path.basename(file_path)} tidak memenuhi syarat.")
 
     def process_folder(self):
         for file_name in os.listdir(self.folder_path):
             if file_name.endswith(".tar.xz"):
                 file_path = os.path.join(self.folder_path, file_name)
-                if self.process_file(file_path):
-                    print(f"File {file_name} memiliki semua data OK tanpa Null atau Anomaly.")
-
-        # Convert the data to DataFrame and insert it into PostgreSQL
-        self.save_to_db()
+                self.process_file(file_path)
+                # Reset ok_data after each file is processed
+                self.ok_data = []
 
     def save_to_db(self):
         if self.ok_data:

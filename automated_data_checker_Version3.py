@@ -10,7 +10,7 @@ class TarXZProcessor:
         self.folder_path = folder_path
         
         # Hard-coded PostgreSQL connection URL
-        self.db_url = 'postgresql+psycopg2://putuwistika:Dev!!@localhost:5432/weather_data'
+        self.db_url = 'postgresql+psycopg2://putu:dev@localhost:5432/db_rmj'
         self.engine = create_engine(self.db_url)
         
         self.ok_data = []
@@ -71,7 +71,7 @@ class TarXZProcessor:
             df['temperature'] = pd.to_numeric(df['temperature'])  # Convert temperature column to numeric type
 
             try:
-                df.to_sql('sensor_readings', self.engine, if_exists='append', index=False)
+                df.to_sql('data_rmj', self.engine, if_exists='append', index=False)
                 print(f"{len(df)} baris data berhasil dimasukkan ke dalam database.")
             except Exception as e:
                 print(f"Terjadi kesalahan saat memasukkan data ke database: {e}")

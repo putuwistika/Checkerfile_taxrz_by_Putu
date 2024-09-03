@@ -23,7 +23,7 @@ class TarXZProcessor:
     def __init__(self, folder_path):
         self.folder_path = folder_path
         self.summary_content = []
-        self.output_folder = "Output_Checker"
+        self.output_folder = "Output_Checker_V2"
         os.makedirs(self.output_folder, exist_ok=True)
         self.summary_file_path = os.path.join(self.output_folder, "summary_all.txt")
 

@@ -40,7 +40,7 @@ class TarXZProcessor:
     def __init__(self, folder_path):
         self.folder_path = folder_path
         self.summary_content = []
-        self.output_folder = os.path.join(os.getcwd(), "Output_Checker")
+        self.output_folder = os.path.join(os.getcwd(), "Output_Checker_V1")
         
         # Buat folder Output_Checker jika belum ada
         if not os.path.exists(self.output_folder):
